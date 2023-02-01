@@ -53,9 +53,11 @@ const getAlbums = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         //const { date } = getCurrentDate();
         const auxArtistName = queryArtist.name;
         yield (0, queries_db_1.saveRequestData)(userIp, respGetCurrentDate['date'].toString(), auxArtistName);
+        const respAddPopularityInListAlbum = yield (0, tools_1.addPopularityInListAlbum)(access_token, queryArtistAlbums.data.items);
+        const auxQAA = yield respAddPopularityInListAlbum.sort((a, b) => b.popularity - a.popularity);
         res.json({
             artist: queryArtist,
-            albums: queryArtistAlbums.data.items,
+            albums: auxQAA,
         });
     }
     catch (error) {

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import {generateToken}  from '../helpers/management-jwt';
 import { getDbToken, setDbToken, updateDbToken, saveRequestData } from '../database/queries-db';
-import {getCurrentDate}  from '../helpers/tools';
+import {addPopularityInListAlbum, getCurrentDate}  from '../helpers/tools';
 import { artist, artistAlbums } from '../helpers/spotify-api-queries';
 
 const getAlbums = async( req: Request, res: Response) => {
@@ -47,9 +47,12 @@ const getAlbums = async( req: Request, res: Response) => {
 
     await saveRequestData(userIp, respGetCurrentDate['date'].toString(), auxArtistName);
 
+    const respAddPopularityInListAlbum = await addPopularityInListAlbum(access_token, queryArtistAlbums.data.items)
+    const auxQAA = await respAddPopularityInListAlbum.sort((a, b) => b.popularity - a.popularity);
+
     res.json({
       artist: queryArtist,
-      albums: queryArtistAlbums.data.items,
+      albums: auxQAA,
     });
   } catch (error) {
     res.status(400).json({

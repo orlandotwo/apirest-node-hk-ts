@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.artistAlbums = exports.artist = void 0;
+exports.getAlbum = exports.artistAlbums = exports.artist = void 0;
 const axios = require('axios');
 const artist = (access_token = '', artist = '') => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -56,4 +56,27 @@ const artistAlbums = (access_token = '', idArtist = '') => __awaiter(void 0, voi
     }
 });
 exports.artistAlbums = artistAlbums;
+const getAlbum = (access_token = '', idAlbum = '') => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const authOptions = {
+            url: 'https://api.spotify.com/v1/albums/' + idAlbum,
+            data: undefined,
+            method: 'GET',
+            headers: {
+                'Content-Type': 'Content-Type: application/json',
+                'Authorization': 'Bearer ' + access_token
+            },
+            params: {
+                type: "album"
+            }
+        };
+        let resp = yield axios(authOptions);
+        return resp;
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+});
+exports.getAlbum = getAlbum;
 //# sourceMappingURL=spotify-api-queries.js.map
