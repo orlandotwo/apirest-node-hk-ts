@@ -1,0 +1,1 @@
+{"version":3,"file":"db-model.js","sourceRoot":"","sources":["../../database/db-model.ts"],"names":[],"mappings":";;;AAAA,MAAM,QAAQ,GAMV;IACA,QAAQ,EAAE,UAAU;IACpB,QAAQ,EAAE,MAAM;IAChB,QAAQ,EAAE,QAAQ;IAClB,IAAI,EAAE,WAAW;IACjB,OAAO,EAAE,SAAS;CACrB,CAAC;AAEO,4BAAQ"}
